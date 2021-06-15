@@ -5,6 +5,7 @@ from tkinter import messagebox
 from validate_email import validate_email
 import rsaidnumber
 from datetime import datetime
+import uuid
 
 # window calibration
 root = Tk()
@@ -67,7 +68,8 @@ class LT:
             age = today - birth
             age = int(age.days / 365)
             print(age)
-            print("pid")
+            player_id = uuid.uuid1()
+            print(player_id)
 
             if name == "":
                 messagebox.showerror("Error", "Please Enter Your Name.")
