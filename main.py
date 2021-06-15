@@ -1,6 +1,12 @@
+# all imported files
+
 from tkinter import *
 from tkinter import messagebox
+from validate_email import validate_email
+import rsaidnumber
+from datetime import datetime
 
+# window calibration
 root = Tk()
 root.title("Lottery")
 root.geometry("800x500")
@@ -34,7 +40,7 @@ class LT:
         self.IDin = Entry(self.frame, width="30", borderwidth="0")
         self.IDin.place(relx="0.5", rely="0.53")
 
-        self.enter = Button(self.frame, text="Submit", width="27", borderwidth="0", bg="#FEFCFB", command=self.sub,
+        self.enter = Button(self.frame, text="Submit", width="27", borderwidth="0", bg="#FEFCFB", command=self.submit,
                             activebackground='#B7094C', highlightbackground="#B7094C",
                             activeforeground="#FEFCFB")
         self.enter.place(relx="0.5", rely="0.7")
@@ -49,23 +55,35 @@ class LT:
                             activeforeground="#FEFCFB")
         self.clear.place(relx="0.671", rely="0.779")
 
-    def sub(self):
-        name = self.namein.get()
-        email = self.emailin.get()
-        ID = self.IDin.get()
+    def submit(self):
 
-        if len(ID) != 13:
-            messagebox.showerror("blah", "blahhhhhhh")
+        try:
+            name = self.namein.get()
+            email = self.emailin.get()
+            ID = self.IDin.get()
+            id_num = rsaidnumber.parse(ID)
+            birth = datetime(id_num.date_of_birth.year, id_num.date_of_birth.month, id_num.date_of_birth.day)
+            today = datetime(datetime.today().year, datetime.today().month, datetime.today().day)
+            age = today - birth
+            age = int(age.days / 365)
+            print(age)
+            print("pid")
 
-        elif name == " ":
-            messagebox.showerror("blahh")
+            if name == "":
+                messagebox.showerror("Error", "Please Enter Your Name.")
 
-        elif email == " ":
-            messagebox.showerror("bro")
+            elif not validate_email(email):
+                messagebox.showerror("Error", "Please Enter Valid Email.")
 
-        else:
-            root.destroy()
-            import window
+            elif age < 18:
+                messagebox.showerror("Error", "Sorry, You Do Not Qualify To Play.")
+
+            else:
+                root.destroy()
+                import window
+
+        except ValueError:
+            messagebox.showerror("Error", "Please Enter Valid Information")
 
     def delete(self):
         self.namein.delete(0, END)
@@ -80,3 +98,5 @@ class LT:
 
 LT(root)
 root.mainloop()
+
+# 9811145170081
