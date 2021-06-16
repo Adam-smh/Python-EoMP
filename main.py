@@ -81,11 +81,27 @@ class LT:
                 messagebox.showerror("Error", "Sorry, You Do Not Qualify To Play.")
 
             else:
+
+                player = {
+                    "PLAYER ID": player_id,
+                    "NAME": name,
+                    "EMAIL": email,
+                    "ID NUMBER": ID
+                    }
+
+                self.add(player)
+
                 root.destroy()
                 import window
 
         except ValueError:
             messagebox.showerror("Error", "Please Enter Valid Information")
+
+    def add(self, submit):
+        import json
+        submit = json.dumps(submit)
+        with open("Database.txt", "a+") as database_file:
+            database_file.write(submit)
 
     def delete(self):
         self.namein.delete(0, END)

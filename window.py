@@ -87,34 +87,41 @@ class game:
         result.config(bg="#B7094C")
         result.geometry("600x800")
 
-        title = Label(result, text="The winning numbers are:", font="sans-serif 14 bold", bg="#B7094C", fg="#FEFCFB")
+        title = Label(result, text="Your Numbers:", font="sans-serif 14 bold", bg="#B7094C", fg="#FEFCFB")
         title.place(relx="0.4", rely="0.04")
 
         frame = Frame(result, width=500, height=700, relief="groove", borderwidth=0, bg="#A01A58")
         frame.place(relx="0.08", rely="0.1")
 
-        lotto1 = Label(frame, text=random1, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto1.place(relx="0.1", rely="0.1")
+        pa = Button(window)
 
-        lotto2 = Label(frame, text=random2, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto2.place(relx="0.2", rely="0.1")
+        Set1 = [self.box1.get(), self.box2.get(), self.box3.get(), self.box4.get(), self.box5.get(), self.box6.get()]
+        print(Set1)
 
-        lotto3 = Label(frame, text=random3, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto3.place(relx="0.3", rely="0.1")
 
-        lotto4 = Label(frame, text=random4, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto4.place(relx="0.4", rely="0.1")
+        # lotto1 = Label(frame, text=random1, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto1.place(relx="0.1", rely="0.1")
+        #
+        # lotto2 = Label(frame, text=random2, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto2.place(relx="0.2", rely="0.1")
+        #
+        # lotto3 = Label(frame, text=random3, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto3.place(relx="0.3", rely="0.1")
+        #
+        # lotto4 = Label(frame, text=random4, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto4.place(relx="0.4", rely="0.1")
+        #
+        # lotto5 = Label(frame, text=random5, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto5.place(relx="0.5", rely="0.1")
+        #
+        # lotto6 = Label(frame, text=random6, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
+        # lotto6.place(relx="0.6", rely="0.1")
+        #
+        # if int(random1) == int(self.box1.get()):
+        #     lotto1.config(fg="green")
+        # if int(random2) == int(self.box2.get()):
+        #     lotto2.config(fg="green")
 
-        lotto5 = Label(frame, text=random5, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto5.place(relx="0.5", rely="0.1")
-
-        lotto6 = Label(frame, text=random6, font="sans-serif 14 bold", bg="#A01A58", fg="#FEFCFB")
-        lotto6.place(relx="0.6", rely="0.1")
-
-        if int(random1) == int(self.box1.get()):
-            lotto1.config(fg="green")
-        if int(random2) == int(self.box2.get()):
-            lotto2.config(fg="green")
 
 
 game(root)
