@@ -82,7 +82,7 @@ class game:
             root.destroy()
 
     def check(self):
-        res = messagebox.askyesno("Wait!!", "Would You Like To See Your Results?")
+        res = messagebox.askyesno("Wait!!", "Would You Like To See Your Entry?")
         if res:
             self.new(self.result)
 
@@ -111,8 +111,10 @@ class game:
                          activeforeground="#FEFCFB")
         btnmain.place(relx="0.1", rely="0.8")
 
-        chesult = Button(frame, text="Results", command=self.realresult)
-        chesult.place(relx="0.5", rely="0.9")
+        chesult = Button(frame, text="Results", command=self.realresult, width="12", borderwidth="0", bg="#FEFCFB",
+                      activebackground='#B7094C', highlightbackground="#B7094C",
+                      activeforeground="#FEFCFB")
+        chesult.place(relx="0.73", rely="0.8")
 
         if str(self.box1.get()) == str(random1):
             self.i = self.i + 1
@@ -140,7 +142,6 @@ class game:
 
     def realresult(self):
         root.withdraw()
-        self.result.destroy()
 
         section = Toplevel()
         section.title("Entries")
@@ -186,25 +187,29 @@ class game:
         if int(self.i) == 6:
             num3.config(text="R10,000,000")
 
-        send = Button(frame, text="Send", command=self.send(), width="12", borderwidth="0", bg="#FEFCFB",
+        send = Button(frame, text="Send", command=self.send, width="12", borderwidth="0", bg="#FEFCFB",
                       activebackground='#B7094C', highlightbackground="#B7094C",
                       activeforeground="#FEFCFB")
         send.place(relx="0.3", rely="0.8")
 
     def send(self):
 
-        root.withdraw()
+        winnings = {0: 0, 1: 0, 2: 20, 3: 100.50, 4: 2384, 5: 8584, 6: 10000000}
+        if self.i in winnings:
+            print(winnings[int(self.i)])
 
-        section2 = Toplevel()
-        section2.title("Extra Details")
-        section2.config(bg="#B7094C")
-        section2.geometry("800x500")
+            Winnings_log = {
+                "Amount Won": winnings[int(self.i)],
+            }
 
-        title3 = Label(section2, font="sans-serif 14 bold", bg="#B7094C", fg="#FEFCFB")
-        title3.place(relx="0.4", rely="0.04")
+            self.add(Winnings_log)
 
-        frame = Frame(section2, width=700, height=400, relief="groove", borderwidth=0, bg="#A01A58")
-        frame.place(relx="0.06", rely="0.1")
+        root.destroy()
+        import window2
+
+    def add(self, send):
+        with open("Database.txt", 'a') as file:
+            file.write("Winnings: {}\n\n".format(send["Amount Won"])),
 
 
 game(root)

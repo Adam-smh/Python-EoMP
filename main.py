@@ -98,11 +98,11 @@ class LT:
             messagebox.showerror("Error", "Please Enter Valid Information")
 
     def add(self, submit):
-        with open("Database.txt", 'w') as file:
-            file.write("Player ID: {}".format(submit["PLAYER ID"])),
-            file.write("Name: {}".format(submit["NAME"])),
-            file.write("Email: {}".format(submit["EMAIL"])),
-            file.write("ID Number: {}".format(submit["ID NUMBER"])),
+        with open("Database.txt", 'a') as file:
+            file.write("Player ID: {}\n".format(submit["PLAYER ID"])),
+            file.write("Name: {}\n".format(submit["NAME"])),
+            file.write("Email: {}\n".format(submit["EMAIL"])),
+            file.write("ID Number: {}\n\n".format(submit["ID NUMBER"])),
 
     def delete(self):
         self.namein.delete(0, END)
