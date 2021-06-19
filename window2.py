@@ -61,7 +61,7 @@ class send:
         self.numE = Entry(self.frame, width="20", borderwidth="0")
         self.numE.place(relx="0.7", rely="0.5")
 
-        self.cur = Label(self.frame, text="Currency:", font="sans-serif 18", bg="#A01A58",
+        self.cur = Label(self.frame, text="Select Currency:", font="sans-serif 18", bg="#A01A58",
                          fg="#FEFCFB")
         self.cur.place(relx="0.1", rely="0.65")
 
@@ -71,6 +71,7 @@ class send:
         self.currency = Label(self.frame, text="", font="sans-serif 18", bg="#A01A58",
                               fg="#FEFCFB")
         self.currency.place(relx="0.1", rely="0.8")
+        self.currency2 = 0
 
         self.con = Button(self.frame, command=self.Convert, text="Convert Currency", width="12", borderwidth="0",
                           bg="#FEFCFB",
@@ -78,7 +79,7 @@ class send:
                           activeforeground="#FEFCFB")
         self.con.place(relx="0.585", rely="0.8")
 
-        self.send = Button(self.frame, command=self.Send(), text="Send Email", width="12", borderwidth="0",
+        self.send = Button(self.frame, command=self.Send, text="Send Email", width="12", borderwidth="0",
                            bg="#FEFCFB",
                            activebackground='#B7094C', highlightbackground="#B7094C",
                            activeforeground="#FEFCFB")
@@ -96,6 +97,7 @@ class send:
 
             else:
                 self.currency.config(text=round(float(win), 2))
+                self.currency2 = round(float(win), 2)
 
         except ValueError:
             messagebox.showerror()
@@ -116,39 +118,41 @@ class send:
 
         try:
 
-            if self.variable.get() == "Select...":
-                messagebox.showerror("Error", "Please Enter")
+            if self.variable.get() == "Select..":
+                messagebox.showerror("Error", "Please Select Bank...")
 
             elif self.currency == "":
-                messagebox.showerror("Error", "Please Enter")
+                messagebox.showerror("Error", "Please Enter Your preferred Currency...")
 
-            elif self.NameE == "":
-                messagebox.showerror("Error", "Please Enter")
+            elif self.NameE.get() == "":
+                messagebox.showerror("Error", "Please Enter Name...")
 
-            elif self.numE == "":
-                messagebox.showerror("Error", "Please Enter")
+            elif self.numE.get() == "":
+                messagebox.showerror("Error", "Please Enter Bank Number..")
+
+            elif self.currency2 == 0:
+                messagebox.showerror("Error", "You are required to convert money into a currency of your choosing...")
 
             else:
 
                 sender_email_id = 'adamafrica.dev@gmail.com'
                 receiver_email_id = [emailU]
-                password = "TaxiDriver8"
+                password = 'TaxiDriver8'
                 subject = "Well Done!"
                 msg = MIMEMultipart()
                 msg['From'] = sender_email_id
                 msg['To'] = ','.join(receiver_email_id)
                 msg['Subject'] = subject
-                body = "Congratulations, You Have Won A Total of{}\n" \
+                body = "Congratulations, You Have Won A Total of {} {}\n" \
                        "Please find your details below\n\n" \
                        "Your Bank: {}\n" \
                        "Account Name: {}\n" \
                        "Account Number: {}\n" \
-                       "Player ID: {}\n" \
-                       "ENJOY\n" \
-                       "Lotto!".format(self.currency(1.0, END), self.bank.get(), self.NameE.get(), self.numE.get(),
+                       "Player ID: {}\n\n" \
+                       "sincerely\n" \
+                       "Lotto!".format(self.currency2, self.curE.get(), self.variable.get(), self.NameE.get(), self.numE.get(),
                                        player_id)
 
-                body = body + ""
                 msg.attach(MIMEText(body, 'plain'))
                 text = msg.as_string()
                 s = smtplib.SMTP('smtp.gmail.com', 587)
@@ -160,6 +164,8 @@ class send:
                 s.sendmail(sender_email_id, receiver_email_id, text)
 
                 s.quit()
+
+                root.destroy()
 
         except ValueError:
             messagebox.showerror("brah")
