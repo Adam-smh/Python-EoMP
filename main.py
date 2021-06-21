@@ -6,6 +6,7 @@ from validate_email import validate_email
 import rsaidnumber
 from datetime import datetime
 import uuid
+from playsound import playsound
 
 # window calibration
 root = Tk()
@@ -87,11 +88,12 @@ class LT:
                     "NAME": name,
                     "EMAIL": email,
                     "ID NUMBER": ID
-                    }
+                }
 
                 self.add(player)
 
                 root.destroy()
+                playsound("iphone.mp3")
                 import window
 
         except ValueError:

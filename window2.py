@@ -150,7 +150,8 @@ class send:
                        "Account Number: {}\n" \
                        "Player ID: {}\n\n" \
                        "sincerely\n" \
-                       "Lotto!".format(self.currency2, self.curE.get(), self.variable.get(), self.NameE.get(), self.numE.get(),
+                       "Lotto!".format(self.currency2, self.curE.get(), self.variable.get(), self.NameE.get(),
+                                       self.numE.get(),
                                        player_id)
 
                 msg.attach(MIMEText(body, 'plain'))

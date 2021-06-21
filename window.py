@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from random import randrange
+from playsound import playsound
 
 root = Tk()
 root.title("Lottery")
@@ -67,6 +68,7 @@ class game:
                             activebackground='#B7094C', highlightbackground="#B7094C",
                             activeforeground="#FEFCFB")
         self.clear.place(relx="0.8", rely="0.7")
+
 
     def delete(self):
         self.box1.delete(0, END)
@@ -143,6 +145,7 @@ class game:
     def realresult(self):
         root.withdraw()
 
+
         section = Toplevel()
         section.title("Entries")
         section.config(bg="#B7094C")
@@ -191,6 +194,18 @@ class game:
                       activebackground='#B7094C', highlightbackground="#B7094C",
                       activeforeground="#FEFCFB")
         send.place(relx="0.3", rely="0.8")
+
+        leave = Button(frame, state="disable", text="Leave", command="exit", width="12", borderwidth="0", bg="#FEFCFB",
+                      activebackground='#B7094C', highlightbackground="#B7094C",
+                      activeforeground="#FEFCFB")
+        leave.place(relx="0.7", rely="0.8")
+
+        if self.i == 0 or self.i == 1:
+            send.config(state="disable")
+            leave.config(state="normal")
+            playsound("erro.mp3")
+        else:
+            playsound("wow.mp3")
 
     def send(self):
 
